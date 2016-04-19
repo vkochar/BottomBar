@@ -1,5 +1,6 @@
 package com.example.bottombar.sample;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.content.ContextCompat;
@@ -22,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
         mMessageView = (TextView) findViewById(R.id.messageView);
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
+
+        mBottomBar.setInActiveTabColor(Color.LTGRAY);
+        mBottomBar.setActiveTabColor(Color.WHITE);
+
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
