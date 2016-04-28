@@ -556,19 +556,8 @@ public class BottomBar extends FrameLayout implements View.OnClickListener, View
         badge.setTag(TAG_BADGE + tabPosition);
         badge.setCount(initialCount);
 
-        tab.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleClick((View) tab.getParent());
-            }
-        });
-
-        tab.setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return handleLongClick((View) tab.getParent());
-            }
-        });
+        ((View) tab.getParent()).setOnClickListener(this);
+        ((View) tab.getParent()).setOnLongClickListener(this);
 
         if (mBadgeMap == null) {
             mBadgeMap = new HashMap<>();
@@ -932,22 +921,26 @@ public class BottomBar extends FrameLayout implements View.OnClickListener, View
 
     private void shiftingMagic(View oldTab, View newTab, boolean animate) {
         if (!mIsTabletMode && mIsShiftingMode && !mIgnoreShiftingResize) {
+
+            View _oldTab = oldTab;
+            View _newTab = newTab;
+
             if (oldTab instanceof FrameLayout) {
                 // It's a badge, goddammit!
-                oldTab = ((FrameLayout) oldTab).getChildAt(0);
+                _oldTab = ((FrameLayout) _oldTab).getChildAt(0);
             }
 
             if (newTab instanceof FrameLayout) {
                 // It's a badge, goddammit!
-                newTab = ((FrameLayout) newTab).getChildAt(0);
+                _newTab = ((FrameLayout) _newTab).getChildAt(0);
             }
 
             if (animate) {
-                MiscUtils.resizeTab(oldTab, oldTab.getWidth(), mInActiveShiftingItemWidth);
-                MiscUtils.resizeTab(newTab, newTab.getWidth(), mActiveShiftingItemWidth);
+                MiscUtils.resizeTab(_oldTab, _oldTab.getWidth(), mInActiveShiftingItemWidth);
+                MiscUtils.resizeTab(_newTab, _newTab.getWidth(), mActiveShiftingItemWidth);
             } else {
-                oldTab.getLayoutParams().width = mInActiveShiftingItemWidth;
-                newTab.getLayoutParams().width = mActiveShiftingItemWidth;
+                _oldTab.getLayoutParams().width = mInActiveShiftingItemWidth;
+                _newTab.getLayoutParams().width = mActiveShiftingItemWidth;
             }
         }
     }
@@ -1011,11 +1004,11 @@ public class BottomBar extends FrameLayout implements View.OnClickListener, View
             }
         }
 
-        if (mBadgeMap.containsKey(newPosition)) {
+        /*if (mBadgeMap.containsKey(newPosition)) {
             BottomBarBadge newBadge = (BottomBarBadge) mOuterContainer
                     .findViewWithTag(mBadgeMap.get(newPosition));
             newBadge.hide();
-        }
+        }*/
     }
 
     @Override
