@@ -172,7 +172,7 @@ public class BottomBarBadge extends TextView {
     }
 
     protected void adjustPosition(View tabToAddTo) {
-        setX((float) (tabToAddTo.getX() + (tabToAddTo.getWidth() / 1.75)));
+        setX((float) (tabToAddTo.getX() + (tabToAddTo.getWidth() / 1.80)));
     }
 
     private void adjustPositionAndSize(View tabToAddTo) {
