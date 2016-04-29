@@ -556,9 +556,6 @@ public class BottomBar extends FrameLayout implements View.OnClickListener, View
         badge.setTag(TAG_BADGE + tabPosition);
         badge.setCount(initialCount);
 
-        ((View) tab.getParent()).setOnClickListener(this);
-        ((View) tab.getParent()).setOnLongClickListener(this);
-
         if (mBadgeMap == null) {
             mBadgeMap = new HashMap<>();
         }
@@ -1321,10 +1318,15 @@ public class BottomBar extends FrameLayout implements View.OnClickListener, View
     private int findItemPosition(View viewToFind) {
         int position = 0;
 
+        View _viewToFind = viewToFind;
+        if (_viewToFind.getTag(R.id.badge) != null && "BADGE".equalsIgnoreCase(_viewToFind.getTag(R.id.badge).toString())) {
+            _viewToFind = (View) _viewToFind.getParent();
+        }
+
         for (int i = 0; i < mItemContainer.getChildCount(); i++) {
             View candidate = mItemContainer.getChildAt(i);
 
-            if (candidate.equals(viewToFind)) {
+            if (candidate.equals(_viewToFind)) {
                 position = i;
                 break;
             }

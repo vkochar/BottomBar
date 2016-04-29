@@ -155,6 +155,7 @@ public class BottomBarBadge extends TextView {
 
         ViewGroup parent = (ViewGroup) tabToAddTo.getParent();
         parent.removeView(tabToAddTo);
+        tabToAddTo.setTag(R.id.badge, "BADGE");
 
         //container.setTag(tabToAddTo.getTag());
         container.addView(tabToAddTo);
