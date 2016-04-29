@@ -50,6 +50,7 @@ public class BottomBarBadge extends TextView {
     private boolean isVisible = false;
     private long animationDuration = 150;
     private boolean autoShowAfterUnSelection = false;
+    private boolean hideIfBadgeCountIsZero = false;
 
     /**
      * Set the unread / new item / whatever count for this Badge.
@@ -57,6 +58,9 @@ public class BottomBarBadge extends TextView {
      * @param count the value this Badge should show.
      */
     public void setCount(int count) {
+        if (count == 0 && hideIfBadgeCountIsZero && isVisible) {
+            hide();
+        }
         this.count = count;
         setText(String.valueOf(count));
     }
@@ -101,9 +105,28 @@ public class BottomBarBadge extends TextView {
     }
 
     /**
+     * Hide the badge if badge count is zero
+     * @param hideIfBadgeCountIsZero
+     */
+    public void setHideIfBadgeCountIsZero(boolean hideIfBadgeCountIsZero) {
+        this.hideIfBadgeCountIsZero = hideIfBadgeCountIsZero;
+    }
+
+    /**
+     * Will the badge be hidden if count is zero
+     * @return
+     */
+    public boolean getHideIfBadgeCountIsZero() {
+        return hideIfBadgeCountIsZero;
+    }
+
+    /**
      * Shows the badge with a neat little scale animation.
      */
     public void show() {
+        if (count == 0 && hideIfBadgeCountIsZero) {
+            return;
+        }
         isVisible = true;
         ViewCompat.animate(this)
                 .setDuration(animationDuration)
