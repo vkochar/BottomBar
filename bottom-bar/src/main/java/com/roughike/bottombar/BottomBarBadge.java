@@ -22,6 +22,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.os.Build;
 import android.support.v4.view.ViewCompat;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -169,9 +170,11 @@ public class BottomBarBadge extends TextView {
                 R.style.BB_BottomBarBadge_Text);
 
         int three = MiscUtils.dpToPixel(context, 3);
+        int two = MiscUtils.dpToPixel(context, 2);
         ShapeDrawable backgroundCircle = BadgeCircle.make(three * 3, backgroundColor);
-        setPadding(three, three, three, three);
+        setPadding(two, two, two, two);
         setBackgroundCompat(backgroundCircle);
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 
         FrameLayout container = new FrameLayout(context);
         container.setLayoutParams(params);
