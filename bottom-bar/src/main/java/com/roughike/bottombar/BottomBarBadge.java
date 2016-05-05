@@ -107,6 +107,7 @@ public class BottomBarBadge extends TextView {
 
     /**
      * Hide the badge if badge count is zero
+     *
      * @param hideIfBadgeCountIsZero
      */
     public void setHideIfBadgeCountIsZero(boolean hideIfBadgeCountIsZero) {
@@ -115,6 +116,7 @@ public class BottomBarBadge extends TextView {
 
     /**
      * Will the badge be hidden if count is zero
+     *
      * @return
      */
     public boolean getHideIfBadgeCountIsZero() {
@@ -175,6 +177,7 @@ public class BottomBarBadge extends TextView {
         setPadding(two, two, two, two);
         setBackgroundCompat(backgroundCircle);
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        setGravity(Gravity.CENTER);
 
         FrameLayout container = new FrameLayout(context);
         container.setLayoutParams(params);
@@ -193,22 +196,26 @@ public class BottomBarBadge extends TextView {
             @SuppressWarnings("deprecation")
             @Override
             public void onGlobalLayout() {
-                adjustPositionAndSize(tabToAddTo);
+                adjustPosition(tabToAddTo);
             }
         });
     }
 
     protected void adjustPosition(View tabToAddTo) {
+        setTranslationY(10);
         setX((float) (tabToAddTo.getX() + (tabToAddTo.getWidth() / 1.80)));
     }
 
-    private void adjustPositionAndSize(View tabToAddTo) {
-        adjustPosition(tabToAddTo);
-        setTranslationY(10);
+    @Override
+    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
-        int size = Math.max(getWidth(), getHeight());
-        getLayoutParams().width = size;
-        getLayoutParams().height = size;
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        int width = getMeasuredWidth();
+        int height = getMeasuredHeight();
+        int sizeSpec = MeasureSpec.makeMeasureSpec(Math.max(width, height), MeasureSpec.EXACTLY);
+
+        super.onMeasure(sizeSpec, sizeSpec);
     }
 
     @SuppressWarnings("deprecation")
