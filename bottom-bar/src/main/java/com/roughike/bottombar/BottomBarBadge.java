@@ -168,15 +168,14 @@ public class BottomBarBadge extends TextView {
 
         setLayoutParams(params);
         setGravity(Gravity.CENTER);
-        MiscUtils.setTextAppearance(this,
-                R.style.BB_BottomBarBadge_Text);
+        MiscUtils.setTextAppearance(this, R.style.BB_BottomBarBadge_Text);
 
-        int three = MiscUtils.dpToPixel(context, 3);
         int two = MiscUtils.dpToPixel(context, 2);
-        ShapeDrawable backgroundCircle = BadgeCircle.make(three * 3, backgroundColor);
-        setPadding(two, two, two, two);
+        int one = MiscUtils.dpToPixel(context, 1);
+        ShapeDrawable backgroundCircle = BadgeCircle.make(two * 3, backgroundColor);
+        setPadding(one, one, one, one);
         setBackgroundCompat(backgroundCircle);
-        setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 9);
         setGravity(Gravity.CENTER);
 
         FrameLayout container = new FrameLayout(context);

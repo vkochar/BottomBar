@@ -40,7 +40,7 @@ import android.widget.TextView;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class MiscUtils {
+public class MiscUtils {
     protected static int getColor(Context context, int color) {
         TypedValue tv = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorPrimary, tv, true);
@@ -79,7 +79,7 @@ class MiscUtils {
      * @param menuRes  the xml menu resource to inflate
      * @return an Array of BottomBarTabs.
      */
-    protected static BottomBarTab[] inflateMenuFromResource(Activity activity, @MenuRes int menuRes) {
+    public static BottomBarTab[] inflateMenuFromResource(Activity activity, @MenuRes int menuRes) {
         // A bit hacky, but hey hey what can I do
         PopupMenu popupMenu = new PopupMenu(activity, null);
         Menu menu = popupMenu.getMenu();

@@ -15,7 +15,6 @@ import android.support.annotation.StyleRes;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -1199,7 +1198,7 @@ public class BottomBar extends FrameLayout implements View.OnClickListener, View
         int translationY = mIsShiftingMode ? mTenDp : mTwoDp;
 
         if (animate) {
-            ViewPropertyAnimatorCompat titleAnimator = ViewCompat.animate(title)
+            /*ViewPropertyAnimatorCompat titleAnimator = ViewCompat.animate(title)
                     .setDuration(ANIMATION_DURATION)
                     .scaleX(1)
                     .scaleY(1);
@@ -1208,12 +1207,12 @@ public class BottomBar extends FrameLayout implements View.OnClickListener, View
                 titleAnimator.alpha(1.0f);
             }
 
-            titleAnimator.start();
+            titleAnimator.start();*/
 
-            ViewCompat.animate(tab)
+            /*ViewCompat.animate(tab)
                     .setDuration(ANIMATION_DURATION)
                     .translationY(-translationY)
-                    .start();
+                    .start();*/
 
             if (mIsShiftingMode) {
                 ViewCompat.animate(icon)
@@ -1224,9 +1223,9 @@ public class BottomBar extends FrameLayout implements View.OnClickListener, View
 
             handleBackgroundColorChange(tabPosition, tab);
         } else {
-            ViewCompat.setScaleX(title, 1);
-            ViewCompat.setScaleY(title, 1);
-            ViewCompat.setTranslationY(tab, -translationY);
+            //ViewCompat.setScaleX(title, 1);
+            //ViewCompat.setScaleY(title, 1);
+            //ViewCompat.setTranslationY(tab, -translationY);
 
             if (mIsShiftingMode) {
                 ViewCompat.setAlpha(icon, 1.0f);
@@ -1262,7 +1261,7 @@ public class BottomBar extends FrameLayout implements View.OnClickListener, View
         float scale = mIsShiftingMode ? 0 : 0.86f;
 
         if (animate) {
-            ViewPropertyAnimatorCompat titleAnimator = ViewCompat.animate(title)
+            /*ViewPropertyAnimatorCompat titleAnimator = ViewCompat.animate(title)
                     .setDuration(ANIMATION_DURATION)
                     .scaleX(scale)
                     .scaleY(scale);
@@ -1271,12 +1270,12 @@ public class BottomBar extends FrameLayout implements View.OnClickListener, View
                 titleAnimator.alpha(0);
             }
 
-            titleAnimator.start();
+            titleAnimator.start();*/
 
-            ViewCompat.animate(tab)
+            /*ViewCompat.animate(tab)
                     .setDuration(ANIMATION_DURATION)
                     .translationY(0)
-                    .start();
+                    .start();*/
 
             if (mIsShiftingMode) {
                 ViewCompat.animate(icon)
@@ -1285,9 +1284,9 @@ public class BottomBar extends FrameLayout implements View.OnClickListener, View
                         .start();
             }
         } else {
-            ViewCompat.setScaleX(title, scale);
-            ViewCompat.setScaleY(title, scale);
-            ViewCompat.setTranslationY(tab, 0);
+            //ViewCompat.setScaleX(title, scale);
+            //ViewCompat.setScaleY(title, scale);
+            //ViewCompat.setTranslationY(tab, 0);
 
             if (mIsShiftingMode) {
                 ViewCompat.setAlpha(icon, 0.6f);
@@ -1337,13 +1336,11 @@ public class BottomBar extends FrameLayout implements View.OnClickListener, View
 
     private void clearItems() {
         if (mItemContainer != null) {
-            int childCount = mItemContainer.getChildCount();
+            mItemContainer.removeAllViews();
+        }
 
-            if (childCount > 0) {
-                for (int i = 0; i < childCount; i++) {
-                    mItemContainer.removeView(mItemContainer.getChildAt(i));
-                }
-            }
+        if (mBadgeMap != null) {
+            mBadgeMap.clear();
         }
 
         if (mFragmentManager != null) {
