@@ -1334,7 +1334,7 @@ public class BottomBar extends FrameLayout implements View.OnClickListener, View
         return position;
     }
 
-    private void clearItems() {
+    public void clearItems() {
         if (mItemContainer != null) {
             mItemContainer.removeAllViews();
         }
